@@ -66,6 +66,61 @@ app.post('/api/tickets', async (req, res) => {
   }
 });
 
+// 3. put: actualizar un ticket existente
+app.put('/api/tickets/:id', async (req, res) => {
+  const { id } = req.params;
+  const { asunto, solicitante, descripcion, categoria, prioridad, estado, fechaRegistro } = req.body;
+
+  try {
+    let pool = await conectarDB();
+    await pool.request()
+      .input('id', sql.Int, id)
+      .input('asunto', sql.VarChar, asunto.trim())
+      .input('solicitante', sql.VarChar, solicitante.trim())
+      .input('descripcion', sql.VarChar, descripcion.trim())
+      .input('categoria', sql.VarChar, categoria.trim())
+      .input('prioridad', sql.VarChar, prioridad.trim())
+      .input('estado', sql.VarChar, estado.trim())
+      .input('fechaRegistro', sql.Date, fechaRegistro)
+      .query(`
+        UPDATE tickets 
+        SET asunto = @asunto, solicitante = @solicitante, descripcion = @descripcion, 
+            categoria = @categoria, prioridad = @prioridad, estado = @estado, fechaRegistro = @fechaRegistro
+        WHERE id = @id
+      `);
+
+    res.status(200).json({
+      mensaje: 'Ticket actualizado exitosamente'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      mensaje: 'Error al actualizar el ticket en la base de datos'
+    });
+  }
+});
+
+// 4. delete: eliminar un ticket
+app.delete('/api/tickets/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    let pool = await conectarDB();
+    await pool.request()
+      .input('id', sql.Int, id)
+      .query('DELETE FROM tickets WHERE id = @id');
+
+    res.status(200).json({
+      mensaje: 'Ticket eliminado exitosamente'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      mensaje: 'Error al eliminar el ticket de la base de datos'
+    });
+  }
+});
+
 // iniciar el servidor
 app.listen(PORT, () => {
   console.log(`API ejecutándose en http://localhost:${PORT}`);
