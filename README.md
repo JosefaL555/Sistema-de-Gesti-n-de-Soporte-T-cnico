@@ -16,4 +16,5 @@ Proyecto Full-Stack desarrollado con Angular, Node.js (Express) y Microsoft SQL 
 
 ### 1. Backend (API REST)
 1. Instalar dependencias:
+```bash
    npm install
