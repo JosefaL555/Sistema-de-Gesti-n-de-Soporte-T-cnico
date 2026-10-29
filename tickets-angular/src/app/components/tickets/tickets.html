@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <h2>Listado de Tickets de Soporte</h2>
+  
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Asunto</th>
+        <th>Solicitante</th>
+        <th>Categoría</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tickets">
+        <td>{{ t.id }}</td>
+        <td>{{ t.asunto }}</td>
+        <td>{{ t.solicitante }}</td>
+        <td>{{ t.categoria }}</td>
+        <td>{{ t.prioridad }}</td>
+        <td>{{ t.estado }}</td>
+        <td>{{ t.fechaRegistro }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

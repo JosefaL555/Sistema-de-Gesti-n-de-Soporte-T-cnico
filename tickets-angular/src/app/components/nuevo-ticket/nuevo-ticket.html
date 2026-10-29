@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2>Registrar Nuevo Ticket</h2>
+  
+  <form (ngSubmit)="guardarTicket()" class="mt-3">
+    <div class="mb-3">
+      <label for="asunto" class="form-label">Asunto</label>
+      <input type="text" class="form-control" id="asunto" [(ngModel)]="ticket.asunto" name="asunto" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" id="descripcion" rows="3" [(ngModel)]="ticket.descripcion" name="descripcion" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="solicitante" class="form-label">Solicitante</label>
+      <input type="text" class="form-control" id="solicitante" [(ngModel)]="ticket.solicitante" name="solicitante" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="categoria" class="form-label">Categoría</label>
+      <select class="form-control" id="categoria" [(ngModel)]="ticket.categoria" name="categoria">
+        <option value="Soporte Técnico">Soporte Técnico</option>
+        <option value="Redes">Redes</option>
+        <option value="Software">Software</option>
+        <option value="Hardware">Hardware</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="prioridad" class="form-label">Prioridad</label>
+      <select class="form-control" id="prioridad" [(ngModel)]="ticket.prioridad" name="prioridad">
+        <option value="Baja">Baja</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Ticket</button>
+  </form>
+</div>
