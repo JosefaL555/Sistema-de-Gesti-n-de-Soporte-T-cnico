@@ -38,14 +38,15 @@ sistemaDeGestion/
 ```bash
 cd backend
 npm install
-node server.js```
+node server.js
+```
 
 ## Comandos de Frontend (Angular)
-
+```bash
 cd frontend/app-tickets
 npm install
 ng serve -o
-
+```
 -------------------------------------------------------------------
 
 ## Operaciones CRUD e Integración Realizada'
