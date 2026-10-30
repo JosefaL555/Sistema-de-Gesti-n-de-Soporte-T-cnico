@@ -43,7 +43,7 @@ node server.js
 
 ## Comandos de Frontend (Angular)
 ```bash
-cd api-tickets
+cd tickets-angular
 npm install
 ng serve -o
 ```
