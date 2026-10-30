@@ -9,7 +9,7 @@ Aplicación web desarrollada para gestionar solicitudes de soporte técnico. Per
 
 - **Frontend:** Angular 22 (Single Page Application - SPA, componentes Standalone, HttpClient, RxJS).
 - **Backend:** Node.js con Express (API REST).
-- **Base de Datos:** MySQL (driver `mysql2` utilizando consultas parametrizadas contra Inyección SQL).
+- **Base de Datos:** Microsoft SQL Server.
 - **Control de Versiones:** Git y GitHub (repositorio público con historial de commits estructurado).
 
 -------------------------------------------------------------------
@@ -36,14 +36,14 @@ sistemaDeGestion/
 ## Comandos para levantar el Backend en la terminal (Nodes.js/Express)
 
 ```bash
-cd backend
+cd api-tickets
 npm install
 node server.js
 ```
 
 ## Comandos de Frontend (Angular)
 ```bash
-cd frontend/app-tickets
+cd api-tickets
 npm install
 ng serve -o
 ```
