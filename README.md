@@ -35,9 +35,10 @@ sistemaDeGestion/
 
 ## Comandos para levantar el Backend en la terminal (Nodes.js/Express)
 
+```bash
 cd backend
 npm install
-node index.js
+node server.js```
 
 ## Comandos de Frontend (Angular)
 
