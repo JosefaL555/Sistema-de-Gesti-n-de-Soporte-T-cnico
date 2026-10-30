@@ -22,11 +22,12 @@ app.get('/api/tickets', async (req, res) => {
     let resultado = await pool.request().query('SELECT * FROM tickets ORDER BY id DESC');
     res.status(200).json(resultado.recordset);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      mensaje: 'Error al consultar los tickets'
+    console.error("ERROR DE SQL:", error);
+    res.status(500).json({ 
+        mensaje: 'Error al consultar los tickets', 
+        errorReal: error.message 
     });
-  }
+}
 });
 
 // 2. post: registrar un nuevo ticket

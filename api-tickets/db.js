@@ -1,13 +1,14 @@
 const sql = require('mssql');
 
 const config = {
-  server: 'localhost',
-  database: 'tickets_db',
-  options: {
-    trustedConnection: true,
-    encrypt: false,
-    trustServerCertificate: true
-  }
+    server: 'localhost\\SQLEXPRESS',
+    database: 'tickets_db',
+    user: 'jolapa',
+    password: 'jose123',
+    options: {
+        encrypt: false,
+        trustServerCertificate: true
+    }
 };
 
 async function conectarDB() {

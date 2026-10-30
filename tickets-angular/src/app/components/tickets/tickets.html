@@ -1,7 +1,63 @@
-<div class="container mt-4">
-  <h2>Listado de Tickets de Soporte</h2>
-  
-  <table class="table table-striped mt-3">
+<div class="container">
+  <!-- Encabezado y botón para abrir/cerrar el formulario -->
+  <div class="header-acciones">
+    <h2>Listado de Tickets de Soporte</h2>
+<button (click)="alternarFormulario()" class="btn-nuevo">
+  {{ mostrarFormulario ? 'Cancelar' : '+ Nuevo Ticket' }}
+</button>
+  </div>
+
+  <!-- Formulario de Creación / Edición -->
+  <div *ngIf="mostrarFormulario" class="form-container">
+    <h3>{{ editando ? 'Editar Ticket #' + idTicketEditando : 'Registrar Nuevo Ticket' }}</h3>
+    <form (ngSubmit)="guardarTicket()">
+      <div class="form-group">
+        <label>Asunto:</label>
+        <input type="text" [(ngModel)]="nuevoTicket.asunto" name="asunto" required>
+      </div>
+      <div class="form-group">
+        <label>Solicitante:</label>
+        <input type="text" [(ngModel)]="nuevoTicket.solicitante" name="solicitante" required>
+      </div>
+      <div class="form-group">
+        <label>Descripción:</label>
+        <textarea [(ngModel)]="nuevoTicket.descripcion" name="descripcion" required></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Categoría:</label>
+          <select [(ngModel)]="nuevoTicket.categoria" name="categoria">
+            <option value="Soporte Técnico">Soporte Técnico</option>
+            <option value="Autenticación">Autenticación</option>
+            <option value="Redes">Redes</option>
+            <option value="Software">Software</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Prioridad:</label>
+          <select [(ngModel)]="nuevoTicket.prioridad" name="prioridad">
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="editando">
+          <label>Estado:</label>
+          <select [(ngModel)]="nuevoTicket.estado" name="estado">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En Proceso">En Proceso</option>
+            <option value="Resuelto">Resuelto</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn-guardar">
+        {{ editando ? 'Actualizar Ticket' : 'Guardar Ticket' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Tabla de Tickets con CRUD -->
+  <table class="tabla-tickets">
     <thead>
       <tr>
         <th>ID</th>
@@ -10,19 +66,34 @@
         <th>Categoría</th>
         <th>Prioridad</th>
         <th>Estado</th>
-        <th>Fecha</th>
+        <th style="text-align: center;">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let t of tickets">
-        <td>{{ t.id }}</td>
-        <td>{{ t.asunto }}</td>
-        <td>{{ t.solicitante }}</td>
-        <td>{{ t.categoria }}</td>
-        <td>{{ t.prioridad }}</td>
-        <td>{{ t.estado }}</td>
-        <td>{{ t.fechaRegistro }}</td>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.asunto }}</td>
+        <td>{{ ticket.solicitante }}</td>
+        <td>{{ ticket.categoria }}</td>
+        <td>
+          <span [ngClass]="{
+            'badge-alta': ticket.prioridad === 'Alta',
+            'badge-media': ticket.prioridad === 'Media',
+            'badge-baja': ticket.prioridad === 'Baja'
+          }">
+            {{ ticket.prioridad }}
+          </span>
+        </td>
+        <td>{{ ticket.estado }}</td>
+        <td style="text-align: center; display: flex; gap: 8px; justify-content: center;">
+          <button (click)="prepararEdicion(ticket)" class="btn-editar">Editar</button>
+          <button (click)="eliminarTicket(ticket.id)" class="btn-eliminar">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Mensajes de Carga o Lista Vacía -->
+  <div *ngIf="cargando" class="mensaje-centro">Cargando tickets... ⏳</div>
+  <div *ngIf="!cargando && tickets.length === 0" class="mensaje-centro">No hay tickets registrados aún.</div>
 </div>
