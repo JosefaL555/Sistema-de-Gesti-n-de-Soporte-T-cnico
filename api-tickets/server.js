@@ -122,7 +122,6 @@ app.delete('/api/tickets/:id', async (req, res) => {
   }
 });
 
-// iniciar el servidor
 app.listen(PORT, () => {
   console.log(`API ejecutándose en http://localhost:${PORT}`);
 });

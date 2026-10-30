@@ -16,7 +16,6 @@ export class TicketsComponent implements OnInit {
   cargando: boolean = true;
   mostrarFormulario: boolean = false;
   
-  // Variables para controlar la edición
   editando: boolean = false;
   idTicketEditando: number | null = null;
 
@@ -72,7 +71,6 @@ export class TicketsComponent implements OnInit {
 
   guardarTicket(): void {
     if (this.editando && this.idTicketEditando !== null) {
-      // Operación PUT (Actualizar)
       this.ticketsService.actualizarTicket(this.idTicketEditando, this.nuevoTicket).subscribe({
         next: (res) => {
           console.log('Ticket actualizado con éxito:', res);
@@ -94,10 +92,8 @@ export class TicketsComponent implements OnInit {
   }
   alternarFormulario(): void {
   if (this.mostrarFormulario) {
-    // Si estaba abierto, lo cerramos y limpiamos
     this.resetearFormulario();
   } else {
-    // Si estaba cerrado, lo abrimos limpio para crear
     this.resetearFormulario();
     this.mostrarFormulario = true;
   }
@@ -119,7 +115,7 @@ export class TicketsComponent implements OnInit {
   }
 
   eliminarTicket(id: number): void {
-    if (confirm('¿Estás segura de que deseas eliminar este ticket?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar este ticket?')) {
       this.ticketsService.eliminarTicket(id).subscribe({
         next: () => {
           this.tickets = this.tickets.filter(t => t.id !== id);

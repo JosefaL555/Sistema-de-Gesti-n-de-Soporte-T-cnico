@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- Encabezado y botón para abrir/cerrar el formulario -->
   <div class="header-acciones">
     <h2>Listado de Tickets de Soporte</h2>
 <button (click)="alternarFormulario()" class="btn-nuevo">
@@ -7,7 +6,6 @@
 </button>
   </div>
 
-  <!-- Formulario de Creación / Edición -->
   <div *ngIf="mostrarFormulario" class="form-container">
     <h3>{{ editando ? 'Editar Ticket #' + idTicketEditando : 'Registrar Nuevo Ticket' }}</h3>
     <form (ngSubmit)="guardarTicket()">
@@ -56,7 +54,6 @@
     </form>
   </div>
 
-  <!-- Tabla de Tickets con CRUD -->
   <table class="tabla-tickets">
     <thead>
       <tr>
@@ -92,8 +89,6 @@
       </tr>
     </tbody>
   </table>
-
-  <!-- Mensajes de Carga o Lista Vacía -->
   <div *ngIf="cargando" class="mensaje-centro">Cargando tickets... ⏳</div>
   <div *ngIf="!cargando && tickets.length === 0" class="mensaje-centro">No hay tickets registrados aún.</div>
 </div>

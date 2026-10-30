@@ -32,7 +32,7 @@ export class NuevoTicketComponent {
     this.ticketsService.crearTicket(this.ticket).subscribe({
       next: () => {
         alert('¡Ticket registrado con éxito!');
-        this.router.navigate(['/tickets']); // O a la ruta principal de tu listado
+        this.router.navigate(['/tickets']);
       },
       error: (err) => {
         console.error('Error al crear el ticket:', err);
